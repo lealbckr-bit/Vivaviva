@@ -11,14 +11,14 @@ export default function HomePage() {
   const [quantities, setQuantities] = useState({
     card1: 20, // Card do vídeo hero
     card2: 20, // Card roxo 500 MIL
-    card3: 40, // Card azul 3 MIL (começa em 40)
+    card3: 20, // Card azul 3 MIL (começa em 20)
     card4: 20  // Card amarelo 10 MIL
   })
 
   // Valores permitidos para cada card
   const allowedValuesCard1 = [20, 40, 60, 80, 100, 200]
   const allowedValuesCard2 = [20, 40, 60, 80, 100, 200]
-  const allowedValuesCard3 = [40, 60, 80, 100, 140, 200]
+  const allowedValuesCard3 = [20, 40, 60, 80, 100, 140, 200]
   const allowedValuesCard4 = [20, 40, 60, 80, 100, 200]
   
   const priceMultiplier = 0.55
@@ -35,6 +35,7 @@ export default function HomePage() {
       200: "https://pay.pague-seguro.shop/checkout/f3adcd2f-4ca1-453b-9fa0-99353be19518"
     },
     card3: {
+      20: "https://pay.pague-seguro.shop/checkout/ba4f0186-fc6f-4053-8549-2d8c779be7c6",
       40: "https://pay.pague-seguro.shop/checkout/ba4f0186-fc6f-4053-8549-2d8c779be7c6",
       60: "https://pay.pague-seguro.shop/checkout/70534ade-c5fd-4ec0-8abe-2bd260ec6a72",
       80: "https://pay.pague-seguro.shop/checkout/820f0266-4b90-49a9-92d3-a1226c5fa3ba",
@@ -143,13 +144,9 @@ export default function HomePage() {
         <div className="container mx-auto px-4 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
-              <Badge className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">
-                🎉 Novo: Sorteios instantâneos disponíveis
-              </Badge>
-
               <div className="space-y-6">
                 <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-balance">
-                  Participe dos <span className="gradient-text">melhores</span> sorteios
+                  Transforme sua sorte em <span className="gradient-text">realidade</span>
                 </h1>
               </div>
 
@@ -163,26 +160,9 @@ export default function HomePage() {
 
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center space-x-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="w-8 h-8 p-0 bg-transparent"
-                        onClick={() => decreaseQuantity('card1')}
-                        disabled={quantities.card1 === getAllowedValues('card1')[0]}
-                      >
-                        <Minus className="w-4 h-4" />
-                      </Button>
-                      <span className="font-bold text-lg px-4">{quantities.card1}</span>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="w-8 h-8 p-0 bg-transparent"
-                        onClick={() => increaseQuantity('card1')}
-                        disabled={quantities.card1 === getAllowedValues('card1')[getAllowedValues('card1').length - 1]}
-                      >
-                        <Plus className="w-4 h-4" />
-                      </Button>
+                    <div className="text-left">
+                      <div className="text-sm text-muted-foreground">Preço especial</div>
+                      <div className="font-bold text-2xl text-green-600">R$ 102,99</div>
                     </div>
                     <div className="text-right">
                       <div className="text-sm text-muted-foreground">Termina em</div>
@@ -192,9 +172,9 @@ export default function HomePage() {
 
                   <Button 
                     className="w-full bg-green-600 hover:bg-green-700 text-white font-bold"
-                    onClick={() => redirectToCheckout('card1', quantities.card1)}
+                    onClick={() => alert('Redirecionando para checkout - R$ 102,99')}
                   >
-                    Participar Agora - R$ {calculatePrice(quantities.card1)}
+                    Participar Agora - R$ 102,99
                   </Button>
                 </CardContent>
               </Card>
@@ -203,100 +183,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="resultados" className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center space-y-4 mb-16">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <Trophy className="w-8 h-8 text-primary" />
-              <h2 className="text-3xl lg:text-4xl font-bold text-primary">Ganhadores do último sorteio</h2>
-            </div>
-            <p className="text-lg text-muted-foreground">
-              Confira os ganhadores do sorteio da edição 003 de domingo, 21 de setembro de 2025
-            </p>
-          </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <Card className="text-center p-6 bg-white shadow-lg hover:shadow-xl transition-shadow">
-              <div className="space-y-4">
-                <div className="w-20 h-20 mx-auto bg-blue-100 rounded-lg flex items-center justify-center">
-                  <div className="w-16 h-16 bg-blue-400 rounded-lg flex items-center justify-center">
-                    <div className="w-12 h-12 bg-blue-500 rounded-full"></div>
-                  </div>
-                </div>
-
-                <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold inline-flex items-center">
-                  🍀 17090571
-                </div>
-
-                <div>
-                  <h3 className="font-bold text-lg">Eliseto P. S.</h3>
-                  <p className="text-muted-foreground text-sm">Feira de Santana - BA</p>
-                </div>
-
-                <div className="bg-green-50 p-3 rounded-lg">
-                  <p className="font-bold text-green-700">R$ 1.000.000,00</p>
-                  <p className="text-green-600 text-sm">Valor líquido</p>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="text-center p-6 bg-white shadow-lg hover:shadow-xl transition-shadow">
-              <div className="space-y-4">
-                <div className="w-20 h-20 mx-auto bg-blue-100 rounded-lg flex items-center justify-center">
-                  <div className="w-16 h-16 bg-blue-400 rounded-lg flex items-center justify-center">
-                    <div className="w-12 h-12 bg-blue-500 rounded-full"></div>
-                  </div>
-                </div>
-
-                <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold inline-flex items-center">
-                  🍀 10569968
-                </div>
-
-                <div>
-                  <h3 className="font-bold text-lg">Aloísio V. P.</h3>
-                  <p className="text-muted-foreground text-sm">Itapecerica da Serra - SP</p>
-                </div>
-
-                <div className="bg-green-50 p-3 rounded-lg">
-                  <p className="font-bold text-green-700">R$ 50.000,00</p>
-                  <p className="text-green-600 text-sm">Valor líquido - #SP</p>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="text-center p-6 bg-white shadow-lg hover:shadow-xl transition-shadow">
-              <div className="space-y-4">
-                <div className="w-20 h-20 mx-auto bg-blue-100 rounded-lg flex items-center justify-center">
-                  <div className="w-16 h-16 bg-blue-400 rounded-lg flex items-center justify-center">
-                    <div className="w-12 h-12 bg-blue-500 rounded-full"></div>
-                  </div>
-                </div>
-
-                <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold inline-flex items-center">
-                  🍀 1141726
-                </div>
-
-                <div>
-                  <h3 className="font-bold text-lg">Irmão E.</h3>
-                  <p className="text-muted-foreground text-sm">Uberlândia - MG</p>
-                </div>
-
-                <div className="bg-green-50 p-3 rounded-lg">
-                  <p className="font-bold text-green-700">R$ 50.000,00</p>
-                  <p className="text-green-600 text-sm">Valor - #MG</p>
-                </div>
-              </div>
-            </Card>
-          </div>
-
-          <div className="text-center mt-12">
-            <Button className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg">
-              Ver mais resultados
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </div>
-        </div>
-      </section>
 
       {/* Active Raffles Section */}
       <section id="sorteios" className="py-20 bg-gradient-to-br from-primary/5 via-purple-500/5 to-blue-500/5">
@@ -469,10 +356,106 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+        </section>
+
+      {/* Ganhadores Section */}
+      <section id="resultados" className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center space-y-4 mb-16">
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <Trophy className="w-8 h-8 text-primary" />
+              <h2 className="text-3xl lg:text-4xl font-bold text-primary">Ganhadores do último sorteio</h2>
+            </div>
+            <p className="text-lg text-muted-foreground">
+              Confira os ganhadores do sorteio da edição 003 de domingo, 21 de setembro de 2025
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <Card className="text-center p-6 bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <div className="space-y-4">
+                <div className="w-20 h-20 mx-auto bg-blue-100 rounded-lg flex items-center justify-center">
+                  <div className="w-16 h-16 bg-blue-400 rounded-lg flex items-center justify-center">
+                    <div className="w-12 h-12 bg-blue-500 rounded-full"></div>
+                  </div>
+                </div>
+
+                <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold inline-flex items-center">
+                  🍀 17090571
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-lg">Eliseto P. S.</h3>
+                  <p className="text-muted-foreground text-sm">Feira de Santana - BA</p>
+                </div>
+
+                <div className="bg-green-50 p-3 rounded-lg">
+                  <p className="font-bold text-green-700">R$ 1.000.000,00</p>
+                  <p className="text-green-600 text-sm">Valor líquido</p>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="text-center p-6 bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <div className="space-y-4">
+                <div className="w-20 h-20 mx-auto bg-blue-100 rounded-lg flex items-center justify-center">
+                  <div className="w-16 h-16 bg-blue-400 rounded-lg flex items-center justify-center">
+                    <div className="w-12 h-12 bg-blue-500 rounded-full"></div>
+                  </div>
+                </div>
+
+                <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold inline-flex items-center">
+                  🍀 10569968
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-lg">Aloísio V. P.</h3>
+                  <p className="text-muted-foreground text-sm">Itapecerica da Serra - SP</p>
+                </div>
+
+                <div className="bg-green-50 p-3 rounded-lg">
+                  <p className="font-bold text-green-700">R$ 50.000,00</p>
+                  <p className="text-green-600 text-sm">Valor líquido - #SP</p>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="text-center p-6 bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <div className="space-y-4">
+                <div className="w-20 h-20 mx-auto bg-blue-100 rounded-lg flex items-center justify-center">
+                  <div className="w-16 h-16 bg-blue-400 rounded-lg flex items-center justify-center">
+                    <div className="w-12 h-12 bg-blue-500 rounded-full"></div>
+                  </div>
+                </div>
+
+                <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold inline-flex items-center">
+                  🍀 1141726
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-lg">Irmão E.</h3>
+                  <p className="text-muted-foreground text-sm">Uberlândia - MG</p>
+                </div>
+
+                <div className="bg-green-50 p-3 rounded-lg">
+                  <p className="font-bold text-green-700">R$ 50.000,00</p>
+                  <p className="text-green-600 text-sm">Valor - #MG</p>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          <div className="text-center mt-12">
+            <Button className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg">
+              Ver mais resultados
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </div>
+        </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-background border-t border-border/40 py-12">
+      <footer className="bg-muted/30 border-t border-border/40 py-16">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-4">
