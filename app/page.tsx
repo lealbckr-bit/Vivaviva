@@ -92,8 +92,8 @@ export default function HomePage() {
     } else if (cardId === 'card3' && checkoutUrls.card3[quantity as keyof typeof checkoutUrls.card3]) {
       window.location.href = checkoutUrls.card3[quantity as keyof typeof checkoutUrls.card3]
     } else {
-      // Para cards sem checkout específico, usar alert temporário
-      alert(`Redirecionando para checkout com quantidade: ${quantity} - Preço: R$ ${calculatePrice(quantity)}`)
+      // Fallback para cards sem checkout específico (não deve ser alcançado para card1, card2, card3)
+      console.error(`Nenhum URL de checkout encontrado para o card ${cardId} com quantidade ${quantity}`)
     }
   }
 
@@ -171,7 +171,8 @@ export default function HomePage() {
                   </div>
 
                   <Button 
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold"                    onClick={() => window.location.href = \'https://pay.pague-seguro.shop/checkout/d1b0e668-a191-4b3a-be60-39e203ce7f00\'}\'}                  >
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold"
+                    onClick={() => window.location.href = 'https://pay.pague-seguro.shop/checkout/d1b0e668-a191-4b3a-be60-39e203ce7f00'}>
                     Participar Agora - R$ 102,99
                   </Button>
                 </CardContent>
@@ -354,97 +355,62 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        </section>
+      </section>
 
-      {/* Ganhadores Section */}
-      <section id="resultados" className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+      {/* Winners Section */}
+      <section id="resultados" className="py-20 bg-gradient-to-tl from-green-500/5 via-blue-500/5 to-purple-500/5">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-16">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <Trophy className="w-8 h-8 text-primary" />
-              <h2 className="text-3xl lg:text-4xl font-bold text-primary">Ganhadores do último sorteio</h2>
-            </div>
-            <p className="text-lg text-muted-foreground">
+            <h2 className="text-3xl lg:text-4xl font-bold">Ganhadores do último sorteio</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Confira os ganhadores do sorteio da edição 003 de domingo, 21 de setembro de 2025
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <Card className="text-center p-6 bg-white shadow-lg hover:shadow-xl transition-shadow">
-              <div className="space-y-4">
-                <div className="w-20 h-20 mx-auto bg-blue-100 rounded-lg flex items-center justify-center">
-                  <div className="w-16 h-16 bg-blue-400 rounded-lg flex items-center justify-center">
-                    <div className="w-12 h-12 bg-blue-500 rounded-full"></div>
-                  </div>
-                </div>
-
-                <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold inline-flex items-center">
-                  🍀 17090571
-                </div>
-
-                <div>
-                  <h3 className="font-bold text-lg">Eliseto P. S.</h3>
-                  <p className="text-muted-foreground text-sm">Feira de Santana - BA</p>
-                </div>
-
-                <div className="bg-green-50 p-3 rounded-lg">
-                  <p className="font-bold text-green-700">R$ 1.000.000,00</p>
-                  <p className="text-green-600 text-sm">Valor líquido</p>
-                </div>
-              </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Winner Card 1 */}
+            <Card className="overflow-hidden border-0 shadow-2xl transform hover:scale-105 transition-all duration-300">
+              <CardContent className="p-4 text-center">
+                <Trophy className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
+                <Badge variant="secondary" className="mb-2">🍀 17090571</Badge>
+                <h3 className="text-xl font-bold mb-1">Eliseto P. S.</h3>
+                <p className="text-muted-foreground text-sm mb-4">Feira de Santana - BA</p>
+                <div className="bg-green-100 text-green-800 font-bold py-2 px-4 rounded-lg">R$ 1.000.000,00</div>
+                <p className="text-xs text-muted-foreground mt-1">Valor líquido</p>
+              </CardContent>
             </Card>
 
-            <Card className="text-center p-6 bg-white shadow-lg hover:shadow-xl transition-shadow">
-              <div className="space-y-4">
-                <div className="w-20 h-20 mx-auto bg-blue-100 rounded-lg flex items-center justify-center">
-                  <div className="w-16 h-16 bg-blue-400 rounded-lg flex items-center justify-center">
-                    <div className="w-12 h-12 bg-blue-500 rounded-full"></div>
-                  </div>
-                </div>
-
-                <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold inline-flex items-center">
-                  🍀 10569968
-                </div>
-
-                <div>
-                  <h3 className="font-bold text-lg">Aloísio V. P.</h3>
-                  <p className="text-muted-foreground text-sm">Itapecerica da Serra - SP</p>
-                </div>
-
-                <div className="bg-green-50 p-3 rounded-lg">
-                  <p className="font-bold text-green-700">R$ 50.000,00</p>
-                  <p className="text-green-600 text-sm">Valor líquido - #SP</p>
-                </div>
-              </div>
+            {/* Winner Card 2 */}
+            <Card className="overflow-hidden border-0 shadow-2xl transform hover:scale-105 transition-all duration-300">
+              <CardContent className="p-4 text-center">
+                <Trophy className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
+                <Badge variant="secondary" className="mb-2">🍀 10569968</Badge>
+                <h3 className="text-xl font-bold mb-1">Aloísio V. P.</h3>
+                <p className="text-muted-foreground text-sm mb-4">Itapecerica da Serra - SP</p>
+                <div className="bg-green-100 text-green-800 font-bold py-2 px-4 rounded-lg">R$ 50.000,00</div>
+                <p className="text-xs text-muted-foreground mt-1">Valor líquido - #SP</p>
+              </CardContent>
             </Card>
 
-            <Card className="text-center p-6 bg-white shadow-lg hover:shadow-xl transition-shadow">
-              <div className="space-y-4">
-                <div className="w-20 h-20 mx-auto bg-blue-100 rounded-lg flex items-center justify-center">
-                  <div className="w-16 h-16 bg-blue-400 rounded-lg flex items-center justify-center">
-                    <div className="w-12 h-12 bg-blue-500 rounded-full"></div>
-                  </div>
-                </div>
-
-                <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold inline-flex items-center">
-                  🍀 1141726
-                </div>
-
-                <div>
-                  <h3 className="font-bold text-lg">Irmão E.</h3>
-                  <p className="text-muted-foreground text-sm">Uberlândia - MG</p>
-                </div>
-
-                <div className="bg-green-50 p-3 rounded-lg">
-                  <p className="font-bold text-green-700">R$ 50.000,00</p>
-                  <p className="text-green-600 text-sm">Valor - #MG</p>
-                </div>
-              </div>
+            {/* Winner Card 3 */}
+            <Card className="overflow-hidden border-0 shadow-2xl transform hover:scale-105 transition-all duration-300">
+              <CardContent className="p-4 text-center">
+                <Trophy className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
+                <Badge variant="secondary" className="mb-2">🍀 1141726</Badge>
+                <h3 className="text-xl font-bold mb-1">Irmão E.</h3>
+                <p className="text-muted-foreground text-sm mb-4">Uberlândia - MG</p>
+                <div className="bg-green-100 text-green-800 font-bold py-2 px-4 rounded-lg">R$ 50.000,00</div>
+                <p className="text-xs text-muted-foreground mt-1">Valor - #MG</p>
+              </CardContent>
             </Card>
           </div>
 
           <div className="text-center mt-12">
-            <Button className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+            >
               Ver mais resultados
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
@@ -453,51 +419,48 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-muted/30 border-t border-border/40 py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <img src="/images/vivasorte-logo-new.png" alt="Viva Sorte +" className="h-10 w-auto" />
-              </div>
-              <p className="text-muted-foreground">
+      <footer className="bg-card py-12">
+        <div className="container mx-auto px-4 text-center text-muted-foreground">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+            <div className="mb-4 md:mb-0">
+              <img src="/images/vivasorte-logo-new.png" alt="Viva Sorte +" className="h-12 w-auto mx-auto md:mx-0" />
+              <p className="mt-2 max-w-xs mx-auto md:mx-0">
                 Transforme sua sorte em realidade com os melhores sorteios e prêmios incríveis.
               </p>
             </div>
 
-            <div className="space-y-4">
-              <h3 className="font-semibold">Sorteios</h3>
-              <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors">Ativos</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Finalizados</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Próximos</a></li>
-              </ul>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="font-semibold">Suporte</h3>
-              <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors">Central de Ajuda</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Contato</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Termos de Uso</a></li>
-              </ul>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="font-semibold">Conecte-se</h3>
-              <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition-colors">Instagram</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">Facebook</a></li>
-                <li><a href="#" className="hover:text-foreground transition-colors">YouTube</a></li>
-              </ul>
+            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
+              <div>
+                <h4 className="text-lg font-semibold mb-2 text-foreground">Sorteios</h4>
+                <ul>
+                  <li><a href="#" className="hover:text-foreground">Ativos</a></li>
+                  <li><a href="#" className="hover:text-foreground">Finalizados</a></li>
+                  <li><a href="#" className="hover:text-foreground">Próximos</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold mb-2 text-foreground">Suporte</h4>
+                <ul>
+                  <li><a href="#" className="hover:text-foreground">Central de Ajuda</a></li>
+                  <li><a href="#" className="hover:text-foreground">Contato</a></li>
+                  <li><a href="#" className="hover:text-foreground">Termos de Uso</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold mb-2 text-foreground">Conecte-se</h4>
+                <ul>
+                  <li><a href="#" className="hover:text-foreground">Instagram</a></li>
+                  <li><a href="#" className="hover:text-foreground">Facebook</a></li>
+                  <li><a href="#" className="hover:text-foreground">YouTube</a></li>
+                </ul>
+              </div>
             </div>
           </div>
 
-          <div className="border-t border-border/40 mt-12 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2025 Viva Sorte +. Todos os direitos reservados.</p>
-          </div>
+          <p className="text-sm">&copy; 2025 Viva Sorte +. Todos os direitos reservados.</p>
         </div>
       </footer>
     </div>
   )
 }
+
