@@ -171,9 +171,7 @@ export default function HomePage() {
                   </div>
 
                   <Button 
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold"
-                    onClick={() => alert('Redirecionando para checkout - R$ 102,99')}
-                  >
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold"                    onClick={() => window.location.href = \'https://pay.pague-seguro.shop/checkout/d1b0e668-a191-4b3a-be60-39e203ce7f00\'}\'}                  >
                     Participar Agora - R$ 102,99
                   </Button>
                 </CardContent>
